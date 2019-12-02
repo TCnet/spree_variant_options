@@ -114,6 +114,7 @@ SpreeVariantOption.OptionValuesHandler.prototype.disableCartInputFields = functi
 SpreeVariantOption.OptionValuesHandler.prototype.showVariantImages = function(variantId) {
   var imagesToShow = this.thumbImages.filter('li.tmb-' + variantId);
   this.thumbImages.hide();
+  
   if (imagesToShow.length === 0 ) {
     allVariantImage = $('li.tmb-all')
     if (allVariantImage.length === 0) {

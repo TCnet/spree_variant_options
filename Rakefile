@@ -1,29 +1,21 @@
-# encoding: UTF-8
 require 'bundler'
-require 'rubygems'
-require 'spree/testing_support/common_rake'
-begin
-  require 'bundler/setup'
-rescue LoadError
-  puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
-end
-
-#require 'rake'
-require 'rake/testtask'
-
 Bundler::GemHelper.install_tasks
 
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = false
+require 'rspec/core/rake_task'
+require 'spree/testing_support/extension_rake'
+
+RSpec::Core::RakeTask.new
+
+task :default do
+  if Dir['spec/dummy'].empty?
+    Rake::Task[:test_app].invoke
+    Dir.chdir('../../')
+  end
+  Rake::Task[:spec].invoke
 end
 
 desc 'Generates a dummy app for testing'
 task :test_app do
-  ENV['LIB_NAME'] = 'spree_variant_options'
-  Rake::Task['common:test_app'].invoke
+  ENV['LIB_NAME'] = 'spree_dislu_link'
+  Rake::Task['extension:test_app'].invoke
 end
-
-task :default => [ :test ]

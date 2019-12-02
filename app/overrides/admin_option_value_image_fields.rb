@@ -4,8 +4,8 @@ Deface::Override.new(
   insert_after: "td.presentation",
   text: "
     <td class='image-preview'>
-    <%= image_tag f.object.image.url(:small) if f.object.has_image? %>
+   
   </td>
-  <td class='image'><%= f.file_field :image %></td>
+  <td class='image'></td>
   "
 )

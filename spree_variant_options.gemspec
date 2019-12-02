@@ -1,36 +1,45 @@
-# -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
+# encoding: UTF-8
+lib = File.expand_path('../lib/', __FILE__)
+$LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
+
 require "spree_variant_options/version"
 
 Gem::Specification.new do |s|
-  s.name        = "spree_variant_options"
-  s.version     = SpreeVariantOptions::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Spencer Steffen"]
-  s.email       = ["spencer@citrusme.com"]
-  s.homepage    = "https://github.com/citrus/spree_variant_options"
-  s.summary     = %q{Spree Variant Options is a simple spree extension that replaces the radio-button variant selection with groups of option types and values.}
-  s.description = %q{Spree Variant Options is a simple spree extension that replaces the radio-button variant selection with groups of option types and values. Please see the documentation for more details.}
+  s.name        = 'spree_variant_options'
+  s.version     = SpreeVariantOptions.version
+  s.summary     = 'Add extension summary here'
+  s.description = 'Add (optional) extension description here'
+  s.required_ruby_version = '>= 2.2.7'
 
-  s.rubyforge_project = "spree_variant_options"
+  s.author    = 'You'
+  s.email     = 'you@example.com'
+  s.homepage  = 'https://github.com/your-github-handle/spree_dislu_link'
+  s.license = 'BSD-3-Clause'
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
+  s.files       = `git ls-files`.split("\n").reject { |f| f.match(/^spec/) && !f.match(/^spec\/fixtures/) }
+  s.require_path = 'lib'
+  s.requirements << 'none'
 
-  # Runtime
-  s.add_dependency 'spree_core', '>= 3.2', '< 3.6'
-  s.add_dependency 'spree_sample', '>= 3.2', '< 3.6'
-  # Development
+  spree_version = '>= 3.2.0', '< 5.0'
+  s.add_dependency 'spree_core', spree_version
+  s.add_dependency 'spree_backend', spree_version
+  s.add_dependency 'spree_extension'
+
   s.add_development_dependency 'appraisal'
-  s.add_development_dependency 'shoulda-matchers',   '~> 3.1.1'
-  s.add_development_dependency 'factory_bot',       '~> 4.8.2'
-  s.add_development_dependency 'coffee-rails',       '~> 4.2.1'
-  s.add_development_dependency 'database_cleaner',   '~> 1.5.3'
-  s.add_development_dependency 'sqlite3',            '~> 1.3.11'
-  s.add_development_dependency 'capybara',           '~> 2.7.1'
-  s.add_development_dependency 'selenium-webdriver', '~> 2.53.0'
-  s.add_development_dependency 'launchy',            '~> 2.4.3'
-  s.add_development_dependency 'rspec-rails',        '~> 3.7'
+  s.add_development_dependency 'awesome_print'
+  s.add_development_dependency 'capybara'
+  s.add_development_dependency 'capybara-screenshot'
+  s.add_development_dependency 'coffee-rails'
+  s.add_development_dependency 'database_cleaner'
+  s.add_development_dependency 'factory_bot', '~> 4.7'
+  s.add_development_dependency 'ffaker'
+  s.add_development_dependency 'mysql2'
+  s.add_development_dependency 'pg'
+  s.add_development_dependency 'pry'
+  s.add_development_dependency 'rspec-rails', '~> 4.0.0.beta2'
+  s.add_development_dependency 'sass-rails'
+  s.add_development_dependency 'simplecov'
+  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'webdrivers', '~> 4.0.0'
 end

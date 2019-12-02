@@ -6,4 +6,6 @@ Spree::Variant.class_eval do
       errors.add(:base, Spree.t(:already_created))
     end
   end
+
+  
 end

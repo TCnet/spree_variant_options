@@ -5,34 +5,14 @@
   <ul class="list-group">
     <% option_value_ids = @product.option_value_ids.uniq %>
     <% ordered_option_types = @product.ordered_option_types.includes(:option_values) %>
-    <% select_image = @product.select_img %>
+
     <% ordered_option_types.each_with_index do |type, index| %>
       <div id="<%= dom_id(type) %>" class="variant-options index-<%= index %>">
         <h6 class="variant-option-type"><strong><%= type.presentation %></strong></h6>
         <ul class="variant-option-values">
           <% type.option_values.sort_by(&:position).each do |value| %>
             <% if option_value_ids.include? value.id %>
-              
-               <% if !select_image[type.id.to_s].empty? %>
-                 <% small_image=""%>
-                 <% select_image[type.id.to_s].each do |s_ob| %>
-                   <% if s_ob[:value_id] == value.id.to_s
-                     small_image = s_ob[:image].url(:small)
-                    end
-                    %>
-                 <% end %>
-                 <% if !small_image.nil? %>
-                 <li class="switch_image"><%= link_to image_tag(main_app.url_for(small_image)), "javascript:void(0)", title: value.presentation, class: "option-value", data: { hook: 'option-value', type_id: type.id, value_id: value.id, level: (index + 1) } %>
-                   <span class="name"><%=value.presentation%></span>
-                 </li>
-                 <%else %>
-                     
-                <% end %>
-               <%else %>
-              <li class="normal"><%= link_to content_tag(:span, value.presentation), "javascript:void(0)", title: value.presentation, class: "option-value", data: { hook: 'option-value', type_id: type.id, value_id: value.id, level: (index + 1) } %></li>
-                <% end %>
-
-                
+              <li><%= link_to content_tag(:span, value.presentation), "javascript:void(0)", title: value.presentation, class: "option-value", data: { hook: 'option-value', type_id: type.id, value_id: value.id, level: (index + 1) } %></li>
             <% end %>
           <% end %>
           <li class="clear"></li>
